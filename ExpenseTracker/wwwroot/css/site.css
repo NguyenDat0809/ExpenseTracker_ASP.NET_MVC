@@ -1,0 +1,63 @@
+
+
+html {
+  font-size: 30px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+*:not(.fa-solid):not(.fa):not(.e) {
+    font-family: "Inter";
+   
+}
+/*Widget*/
+.widget{
+    background-color: whitesmoke;
+    border: 1px solid black;
+}
+
+/*Button*/
+.btn:focus, .btn:active {
+    outline:none !important;
+    box-shadow: none;
+}
+
+/*Hyperlink*/
+.no-a-decoration, .no-a-decoration:hover{
+    text-decoration:none;
+    color: inherit;
+}
+
+.main-content{
+    margin-left: 145px;
+}
+
+.widget.chart {
+    padding: 5px;
+}
+
+.profile{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+
+

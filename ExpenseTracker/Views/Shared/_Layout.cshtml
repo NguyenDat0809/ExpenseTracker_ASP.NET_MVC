@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExpenseTracker</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Syncfusion ASP.NET Core controls styles -->
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/24.1.44/material.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Poppins&family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ExpenseTracker.styles.css" asp-append-version="true" />
+    <!-- Syncfusion ASP.NET Core controls scripts -->
+    <script src="https://cdn.syncfusion.com/ej2/24.1.44/dist/ej2.min.js"></script>
+
+</head>
+<body class="e-bigger">
+    <partial name="_Sidebar"/>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <div class="container-fluid py-2 px-4">
+
+                <i class="fa-solid fa-magnifying-glass fa-2xl "></i>
+                <div class=" ">
+                    <i class="fa-solid fa-bell fa-2xl px-2 "></i>
+                    <i class="fa-solid fa-message fa-2xl px-2"></i>
+                    <img class="profile" src="./profile.png" />
+                </div>
+            </div>
+        </nav>
+        
+    </header>
+    <div class="main-content">
+    <div class="container mt-5">
+        <main role="main" class="pb-3">
+            <div class="row justify-content-start">
+                <div class="col-md-7 d-flex flex-column mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <h3 class="text-primary"><b>@ViewData["PageTitle"]</h3>
+                        @if (@ViewData["PageActionUrl"] != null)
+                        {
+                            <a class="btn btn-primary" href="@ViewData["PageActionUrl"]">
+                                <span class="text-white">@ViewData["PageActionText"]</span>
+                            </a>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+    </div>
+
+
+    <!-- Syncfusion ASP.NET Core Script Manager -->
+    <ejs-scripts></ejs-scripts>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

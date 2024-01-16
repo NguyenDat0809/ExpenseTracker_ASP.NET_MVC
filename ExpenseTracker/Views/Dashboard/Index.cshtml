@@ -1,0 +1,147 @@
+﻿@* Summary widget *@
+<div class="row mb-4">
+    @* Total Income *@
+    <div class="col-sm-12 col-md-4 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="icon">
+                    <i class="fa-solid fa-dollar-sign fa-2xlg"></i>
+                </div>
+                <div class="text-end">
+                    <h3 class="card-title">Total Income</h3>
+                    <h1 class="display-6 fw-bold">@ViewBag.TotalIncome</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Total Expense *@
+    <div class="col-sm-12 col-md-4 mb-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="icon">
+                    <i class="fa-solid fa-dollar-sign fa-2xlg"></i>
+                </div>
+                <div class="text-end">
+                    <h3 class="card-title">Total Expense</h3>
+                    <h1 class="display-6 fw-bold">@ViewBag.TotalExpense</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Balance *@
+    <div class="col-sm-12 col-md-4 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="icon">
+                    <i class="fa-solid fa-dollar-sign fa-2xlg"></i>
+                </div>
+                <div class="text-end">
+                    <h3 class="card-title">Balance</h3>
+                    <h1 class="display-6 fw-bold">@ViewBag.Balance</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Doughnut  Chart *@
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card chart">
+            <div class="card-body p-4">
+                <h5 class="fw-bold">Expense By Category</h5>
+            </div>
+            <div class="control-section" align='center'>
+                <ejs-accumulationchart id="doughnutchart" enableSmartLabels background="#fff">
+                    <e-accumulation-series-collection>
+                        <e-accumulation-series dataSource="ViewBag.DoughnutChartData"
+                                               xName="CategoryName"
+                                               yName="Data"
+                                               innerRadius="40%" legendShape="Circle">
+                            <!--
+                             <e-accumulation-series has attribute palettes to modify the color too
+                                 palettes=@(new string[] { "#54ffa9", "#ffe91a", "#cb9b00", "#8a442c", "#0454b5", "#7a0a0a", "#822690", "#313e93" })
+                            -->
+                            <e-accumulationseries-datalabel name="formattedAmount" visible></e-accumulationseries-datalabel>
+                        </e-accumulation-series>
+                    </e-accumulation-series-collection>
+                    <e-accumulationchart-legendsettings position="Top" toggleVisibility="false"></e-accumulationchart-legendsettings>
+                </ejs-accumulationchart>
+            </div>
+        </div>
+    </div>
+    @* Spline Chart *@
+    <div class="col-md-8">
+        <div class="card chart">
+            <div class="card-body p-4">
+                <h5 class="fw-bold">Income vs Expense</h5>
+            </div>
+            <!--list of color to palettes to edit color of line-->
+            <div class="control-section" align='center'>
+                <ejs-chart id="spline-chart" background="#fff"
+                           palettes=@(new string[]{"#54ffa9","#ffe91a"})>
+                    <!--style lauout of spline chart-->
+                    <e-chart-primaryxaxis valueType="Category">
+                        <e-majorgridlines width="0"></e-majorgridlines>
+                        <e-majorticklines width="0"></e-majorticklines>
+                    </e-chart-primaryxaxis>
+
+
+                    <e-chart-primaryyaxis>
+                        <e-majorgridlines width="1" color="#32414d" dashArray="3,5"></e-majorgridlines>
+                        <e-majorticklines width="0"></e-majorticklines>
+                        <e-linestyle width="0"></e-linestyle>
+                    </e-chart-primaryyaxis>
+
+
+                    <e-chart-chartarea>
+                        <e-chartarea-border width="0"></e-chartarea-border>
+                    </e-chart-chartarea>
+
+                    <!--modify the line-->
+
+                    <e-series-collection>
+                        <e-series dataSource="@ViewBag.SplineChartData" xName="day" yName="income" name="Income"
+                                  type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline"></e-series>
+                        <e-series dataSource="@ViewBag.SplineChartData" xName="day" yName="expense" name="Expense"
+                                  type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline"></e-series>
+                    </e-series-collection>
+
+                    <e-chart-legendsettings position="Top" toggleVisibility="false" alignment="Far">
+                        <e-legendsettings-textstyle size="1rem"></e-legendsettings-textstyle>
+                    </e-chart-legendsettings>
+                    <e-chart-tooltipsettings enable shared></e-chart-tooltipsettings>
+                </ejs-chart>
+            </div>
+        </div>
+    </div>
+
+    @*Recent Transaction and More*@
+    <div class="row">
+        <div class="col-md-6">
+            <div class="p-4">
+                <h3 class="fw-bold"> Recent Transaction</h3>
+            </div>
+            <div class="px-4 pb-4">
+                <ejs-grid id="recent-transaction" dataSource="@ViewBag.RecentTransaction" gridLines="None">
+                    <e-grid-pagesettings pageSize="5"></e-grid-pagesettings>
+                    <e-grid-columns>
+                        <e-grid-column headerText="Category" field="Category.IconWithTitle"></e-grid-column>
+                        <e-grid-column textAlign="Left" format="MMM dd yyyy" headerText="Date" field="Date"></e-grid-column>
+                        <e-grid-column textAlign="Right" headerText="Amount" field="FormattedAmount"></e-grid-column>
+                    </e-grid-columns>
+                </ejs-grid>
+            </div>
+        </div>
+        <div class="col-md-6 mt-3">
+            <div class="widget h-100">
+                <div class="d-flex justify-content-center align-items-center ">
+                    <i class="fa-solid fa-plus">Widget</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
